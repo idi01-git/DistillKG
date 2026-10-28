@@ -1,0 +1,45 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Research Artifacts & Outputs
+outputs/
+papers/
+audit/
+notes/
+CHANGELOG.md
+autoresearch.jsonl
+PROJECT_PLAN.md
+RELEASES.md
+AGENTS.md
+
+# Agent configurations & workspace scratch
+.agents/
+.skills_staging/
+.gemini/
+
+# Datasets and Model weights (binary artifacts)
+data/*
+!data/distillation_ontology.json
+models/
+*.pt
+*.bin
+*.npz
+*.parquet
+*.h5
+*.ckpt
+*.onnx
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

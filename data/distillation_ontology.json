@@ -1,0 +1,234 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "metadata": {
+    "title": "Industrial Continuous Distillation Column & TEP P&ID Knowledge Graph",
+    "version": "1.0.0",
+    "description": "Deterministic physical topology, sensor-equipment bindings, and dynamic regime-modulated causal edges for continuous distillation column fault diagnosis."
+  },
+  "subsystems": [
+    {
+      "id": "SUB_FEED",
+      "name": "Feed Preheating & Delivery Subsystem",
+      "description": "Feed storage, supply manifolds, preheating exchangers, and column feed tray nozzles."
+    },
+    {
+      "id": "SUB_COLUMN",
+      "name": "Distillation Column Internal Trays",
+      "description": "Multi-stage fractionation shell, stripping section, rectifying section, and mid-column trays (Tray 6)."
+    },
+    {
+      "id": "SUB_OVERHEAD",
+      "name": "Overhead Vapor & Condensation Subsystem",
+      "description": "Overhead vapor riser, total condenser heat exchanger, and off-gas vent purge line."
+    },
+    {
+      "id": "SUB_REFLUX",
+      "name": "Reflux Accumulator & Distillate Take-off",
+      "description": "Reflux drum, reflux return pump, distillate draw line, and reflux control loop."
+    },
+    {
+      "id": "SUB_REBOILER",
+      "name": "Reboiler & Bottoms Product Subsystem",
+      "description": "Column sump reservoir, thermosiphon steam reboiler, boilup vapor line, and bottoms product draw."
+    }
+  ],
+  "equipment_nodes": [
+    {"id": "EQ_FEED_MANIFOLD", "name": "Raw Component Feed Header", "subsystem": "SUB_FEED"},
+    {"id": "EQ_REACTOR", "name": "Exothermic CSTR Reaction Unit", "subsystem": "SUB_FEED"},
+    {"id": "EQ_FEED_TRAY", "name": "Distillation Column Feed Tray Nozzle", "subsystem": "SUB_FEED"},
+    {"id": "EQ_STRIPPING_SECTION", "name": "Stripping Section Trays", "subsystem": "SUB_COLUMN"},
+    {"id": "EQ_RECTIFYING_SECTION", "name": "Rectifying Section Trays (Upper Trays)", "subsystem": "SUB_COLUMN"},
+    {"id": "EQ_MID_TRAY_6", "name": "Column Intermediate Tray 6", "subsystem": "SUB_COLUMN"},
+    {"id": "EQ_TOP_TRAY", "name": "Column Overhead Tray Section", "subsystem": "SUB_COLUMN"},
+    {"id": "EQ_CONDENSER", "name": "Overhead Total Condenser Exchanger", "subsystem": "SUB_OVERHEAD"},
+    {"id": "EQ_OFFGAS_VENT", "name": "Overhead Off-gas / Purge Line", "subsystem": "SUB_OVERHEAD"},
+    {"id": "EQ_REFLUX_DRUM", "name": "Reflux Accumulator Vessel", "subsystem": "SUB_REFLUX"},
+    {"id": "EQ_REFLUX_LOOP", "name": "Reflux Recycle Pump & Valve Loop", "subsystem": "SUB_REFLUX"},
+    {"id": "EQ_DISTILLATE_LINE", "name": "Distillate Product Draw Line", "subsystem": "SUB_REFLUX"},
+    {"id": "EQ_COLUMN_SUMP", "name": "Column Bottom Liquid Sump", "subsystem": "SUB_REBOILER"},
+    {"id": "EQ_REBOILER", "name": "Thermosiphon Steam Reboiler", "subsystem": "SUB_REBOILER"},
+    {"id": "EQ_BOTTOMS_LINE", "name": "Bottoms Product Take-off Line", "subsystem": "SUB_REBOILER"}
+  ],
+  "sensor_nodes": [
+    {"id": "xmeas_1", "name": "Feed A Stream Flow", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_2", "name": "Feed D Stream Flow", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_3", "name": "Feed E Stream Flow", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_4", "name": "Total Feed Rate", "equipment": "EQ_FEED_TRAY", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_5", "name": "Recycle Flow Rate", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_6", "name": "Reactor Feed Rate", "equipment": "EQ_FEED_TRAY", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_7", "name": "Reactor Pressure", "equipment": "EQ_REACTOR", "subsystem": "SUB_FEED", "type": "pressure"},
+    {"id": "xmeas_8", "name": "Reactor Level", "equipment": "EQ_REACTOR", "subsystem": "SUB_FEED", "type": "level"},
+    {"id": "xmeas_9", "name": "Reactor Temperature", "equipment": "EQ_REACTOR", "subsystem": "SUB_FEED", "type": "temperature"},
+    {"id": "xmeas_10", "name": "Purge Gas Flow", "equipment": "EQ_OFFGAS_VENT", "subsystem": "SUB_OVERHEAD", "type": "flow"},
+    {"id": "xmeas_11", "name": "Condenser / Separator Temperature", "equipment": "EQ_CONDENSER", "subsystem": "SUB_OVERHEAD", "type": "temperature"},
+    {"id": "xmeas_12", "name": "Stripper Sump Level", "equipment": "EQ_COLUMN_SUMP", "subsystem": "SUB_REBOILER", "type": "level"},
+    {"id": "xmeas_13", "name": "Stripper Pressure", "equipment": "EQ_STRIPPING_SECTION", "subsystem": "SUB_COLUMN", "type": "pressure"},
+    {"id": "xmeas_14", "name": "Stripper Underflow Flow", "equipment": "EQ_BOTTOMS_LINE", "subsystem": "SUB_REBOILER", "type": "flow"},
+    {"id": "xmeas_15", "name": "Stripper Steam Flow", "equipment": "EQ_REBOILER", "subsystem": "SUB_REBOILER", "type": "flow"},
+    {"id": "xmeas_16", "name": "Separator Pressure", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED", "type": "pressure"},
+    {"id": "xmeas_17", "name": "Separator Underflow", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED", "type": "flow"},
+    {"id": "xmeas_18", "name": "Stripper Bottom Temperature", "equipment": "EQ_COLUMN_SUMP", "subsystem": "SUB_REBOILER", "type": "temperature"},
+    {"id": "xmeas_19", "name": "Fractionator Sump Level", "equipment": "EQ_COLUMN_SUMP", "subsystem": "SUB_REBOILER", "type": "level"},
+    {"id": "xmeas_20", "name": "Fractionator Overhead Pressure", "equipment": "EQ_TOP_TRAY", "subsystem": "SUB_OVERHEAD", "type": "pressure"},
+    {"id": "xmeas_21", "name": "Fractionator Bottoms Flow", "equipment": "EQ_BOTTOMS_LINE", "subsystem": "SUB_REBOILER", "type": "flow"},
+    {"id": "xmeas_22", "name": "Fractionator Off-Gas Purge", "equipment": "EQ_OFFGAS_VENT", "subsystem": "SUB_OVERHEAD", "type": "flow"},
+    {"id": "xmeas_23", "name": "Fractionator Cooling Water Temp", "equipment": "EQ_CONDENSER", "subsystem": "SUB_OVERHEAD", "type": "temperature"},
+    {"id": "xmeas_24", "name": "Condenser Cooling Water Outlet Temp", "equipment": "EQ_CONDENSER", "subsystem": "SUB_OVERHEAD", "type": "temperature"},
+    {"id": "top_tray_temp", "name": "Debutanizer Top Tray Temp (u1)", "equipment": "EQ_TOP_TRAY", "subsystem": "SUB_COLUMN", "type": "temperature"},
+    {"id": "top_pressure", "name": "Debutanizer Top Pressure (u2)", "equipment": "EQ_TOP_TRAY", "subsystem": "SUB_OVERHEAD", "type": "pressure"},
+    {"id": "reflux_flow", "name": "Debutanizer Reflux Flow (u3)", "equipment": "EQ_REFLUX_LOOP", "subsystem": "SUB_REFLUX", "type": "flow"},
+    {"id": "distillate_flow", "name": "Debutanizer Distillate Flow (u4)", "equipment": "EQ_DISTILLATE_LINE", "subsystem": "SUB_REFLUX", "type": "flow"},
+    {"id": "tray6_temp", "name": "Debutanizer Tray 6 Temp (u5)", "equipment": "EQ_MID_TRAY_6", "subsystem": "SUB_COLUMN", "type": "temperature"},
+    {"id": "reboiler_bottom_temp", "name": "Debutanizer Bottom Temp (u6)", "equipment": "EQ_COLUMN_SUMP", "subsystem": "SUB_REBOILER", "type": "temperature"},
+    {"id": "reboiler_steam_flow", "name": "Debutanizer Steam Flow (u7)", "equipment": "EQ_REBOILER", "subsystem": "SUB_REBOILER", "type": "flow"},
+    {"id": "butane_content", "name": "Debutanizer Bottom Butane Impurity (y)", "equipment": "EQ_BOTTOMS_LINE", "subsystem": "SUB_REBOILER", "type": "composition"}
+  ],
+  "actuator_nodes": [
+    {"id": "xmv_1", "name": "D Feed Control Valve", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED"},
+    {"id": "xmv_2", "name": "E Feed Control Valve", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED"},
+    {"id": "xmv_3", "name": "A Feed Control Valve", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED"},
+    {"id": "xmv_4", "name": "Total Feed Control Valve", "equipment": "EQ_FEED_TRAY", "subsystem": "SUB_FEED"},
+    {"id": "xmv_5", "name": "Compressor Recycle Valve", "equipment": "EQ_FEED_MANIFOLD", "subsystem": "SUB_FEED"},
+    {"id": "xmv_6", "name": "Overhead Purge Valve", "equipment": "EQ_OFFGAS_VENT", "subsystem": "SUB_OVERHEAD"},
+    {"id": "xmv_7", "name": "Stripper Underflow Valve", "equipment": "EQ_BOTTOMS_LINE", "subsystem": "SUB_REBOILER"},
+    {"id": "xmv_8", "name": "Stripper Steam Valve", "equipment": "EQ_REBOILER", "subsystem": "SUB_REBOILER"},
+    {"id": "xmv_9", "name": "Fractionator Bottoms Valve", "equipment": "EQ_BOTTOMS_LINE", "subsystem": "SUB_REBOILER"},
+    {"id": "xmv_10", "name": "Reactor Cooling Water Valve", "equipment": "EQ_REACTOR", "subsystem": "SUB_FEED"},
+    {"id": "xmv_11", "name": "Condenser Cooling Water Valve", "equipment": "EQ_CONDENSER", "subsystem": "SUB_OVERHEAD"}
+  ],
+  "fault_nodes": [
+    {
+      "id": "Fault_1",
+      "name": "Feed A/C Ratio Disturbance",
+      "subsystem": "SUB_FEED",
+      "initiating_component": "EQ_FEED_MANIFOLD",
+      "mechanism": "Step change in upstream A/C feed composition shifts molar density into column."
+    },
+    {
+      "id": "Fault_2",
+      "name": "Component B Composition Shift (VLE Displacement)",
+      "subsystem": "SUB_FEED",
+      "initiating_component": "EQ_FEED_TRAY",
+      "mechanism": "Feed B composition drift alters vapor-liquid equilibrium (VLE) curve across all trays."
+    },
+    {
+      "id": "Fault_5",
+      "name": "Condenser Cooling Water Temperature Step",
+      "subsystem": "SUB_OVERHEAD",
+      "initiating_component": "EQ_CONDENSER",
+      "mechanism": "Cooling water temperature spike reduces log-mean temperature difference (LMTD), elevating column pressure."
+    },
+    {
+      "id": "Fault_6",
+      "name": "Feed A Starvation (Weeping Hazard)",
+      "subsystem": "SUB_FEED",
+      "initiating_component": "EQ_FEED_MANIFOLD",
+      "mechanism": "Sudden reduction in light component feed lowers tray liquid head, risking tray weeping."
+    },
+    {
+      "id": "Fault_11",
+      "name": "Reactor Cooling Water Valve Sticking",
+      "subsystem": "SUB_FEED",
+      "initiating_component": "EQ_REACTOR",
+      "mechanism": "Mechanical stiction in reactor cooling water valve XMV(10) disrupts thermal runaway control in CSTR."
+    },
+    {
+      "id": "Fault_15",
+      "name": "Condenser Cooling Valve Stiction",
+      "subsystem": "SUB_OVERHEAD",
+      "initiating_component": "EQ_CONDENSER",
+      "mechanism": "Valve deadband stiction generates limit-cycle oscillations in overhead pressure."
+    },
+    {
+      "id": "Fault_Debutanizer_Reflux_Loss",
+      "name": "Debutanizer Reflux Pump Degradation",
+      "subsystem": "SUB_REFLUX",
+      "initiating_component": "EQ_REFLUX_LOOP",
+      "mechanism": "Reflux flow drops, diminishing internal liquid downflow and allowing heavy butane to vaporize overhead."
+    },
+    {
+      "id": "Fault_Debutanizer_Reboiler_Fouling",
+      "name": "Debutanizer Reboiler Steam Tube Fouling",
+      "subsystem": "SUB_REBOILER",
+      "initiating_component": "EQ_REBOILER",
+      "mechanism": "Overall heat transfer coefficient U declines, forcing steam valve to 100% saturation."
+    }
+  ],
+  "edges": [
+    {"source": "Fault_1", "target": "EQ_FEED_MANIFOLD", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_2", "target": "EQ_FEED_TRAY", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_5", "target": "EQ_CONDENSER", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_6", "target": "EQ_FEED_MANIFOLD", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_11", "target": "EQ_REACTOR", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_15", "target": "EQ_CONDENSER", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_Debutanizer_Reflux_Loss", "target": "EQ_REFLUX_LOOP", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "Fault_Debutanizer_Reboiler_Fouling", "target": "EQ_REBOILER", "relation": "initiates_disturbance_in", "base_weight": 1.0, "dynamic_regime": false},
+
+    {"source": "EQ_FEED_MANIFOLD", "target": "EQ_REACTOR", "relation": "raw_material_feed", "base_weight": 0.95, "dynamic_regime": false},
+    {"source": "EQ_REACTOR", "target": "EQ_FEED_TRAY", "relation": "reactor_effluent_feed", "base_weight": 0.9, "dynamic_regime": false},
+    {"source": "EQ_FEED_TRAY", "target": "EQ_STRIPPING_SECTION", "relation": "liquid_downflow", "base_weight": 0.85, "dynamic_regime": false},
+    {"source": "EQ_FEED_TRAY", "target": "EQ_MID_TRAY_6", "relation": "vapor_upflow", "base_weight": 0.85, "dynamic_regime": true, "regime_driver": "reboiler_duty"},
+    {"source": "EQ_STRIPPING_SECTION", "target": "EQ_COLUMN_SUMP", "relation": "liquid_downflow", "base_weight": 0.9, "dynamic_regime": false},
+    {"source": "EQ_COLUMN_SUMP", "target": "EQ_REBOILER", "relation": "thermosiphon_feed", "base_weight": 0.95, "dynamic_regime": false},
+    {"source": "EQ_COLUMN_SUMP", "target": "EQ_BOTTOMS_LINE", "relation": "product_drain", "base_weight": 0.9, "dynamic_regime": false},
+    {"source": "EQ_REBOILER", "target": "EQ_STRIPPING_SECTION", "relation": "vapor_boilup", "base_weight": 0.95, "dynamic_regime": true, "regime_driver": "reboiler_duty"},
+    {"source": "EQ_STRIPPING_SECTION", "target": "EQ_MID_TRAY_6", "relation": "vapor_upflow", "base_weight": 0.85, "dynamic_regime": true, "regime_driver": "reboiler_duty"},
+    {"source": "EQ_MID_TRAY_6", "target": "EQ_RECTIFYING_SECTION", "relation": "vapor_upflow", "base_weight": 0.85, "dynamic_regime": true, "regime_driver": "reboiler_duty"},
+    {"source": "EQ_RECTIFYING_SECTION", "target": "EQ_TOP_TRAY", "relation": "vapor_upflow", "base_weight": 0.9, "dynamic_regime": true, "regime_driver": "reboiler_duty"},
+    {"source": "EQ_TOP_TRAY", "target": "EQ_CONDENSER", "relation": "overhead_vapor_draw", "base_weight": 0.95, "dynamic_regime": false},
+    {"source": "EQ_CONDENSER", "target": "EQ_OFFGAS_VENT", "relation": "purge_vent", "base_weight": 0.7, "dynamic_regime": false},
+    {"source": "EQ_CONDENSER", "target": "EQ_REFLUX_DRUM", "relation": "condensate_drain", "base_weight": 0.95, "dynamic_regime": false},
+    {"source": "EQ_REFLUX_DRUM", "target": "EQ_REFLUX_LOOP", "relation": "pump_suction", "base_weight": 0.9, "dynamic_regime": false},
+    {"source": "EQ_REFLUX_DRUM", "target": "EQ_DISTILLATE_LINE", "relation": "product_draw", "base_weight": 0.85, "dynamic_regime": false},
+    {"source": "EQ_REFLUX_LOOP", "target": "EQ_TOP_TRAY", "relation": "reflux_return", "base_weight": 0.95, "dynamic_regime": true, "regime_driver": "reflux_ratio"},
+    {"source": "EQ_TOP_TRAY", "target": "EQ_RECTIFYING_SECTION", "relation": "liquid_downflow", "base_weight": 0.9, "dynamic_regime": true, "regime_driver": "reflux_ratio"},
+    {"source": "EQ_RECTIFYING_SECTION", "target": "EQ_MID_TRAY_6", "relation": "liquid_downflow", "base_weight": 0.9, "dynamic_regime": true, "regime_driver": "reflux_ratio"},
+    {"source": "EQ_MID_TRAY_6", "target": "EQ_FEED_TRAY", "relation": "liquid_downflow", "base_weight": 0.85, "dynamic_regime": true, "regime_driver": "reflux_ratio"},
+
+    {"source": "EQ_FEED_MANIFOLD", "target": "xmeas_1", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_MANIFOLD", "target": "xmeas_2", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_MANIFOLD", "target": "xmeas_3", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_TRAY", "target": "xmeas_4", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_MANIFOLD", "target": "xmeas_5", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_TRAY", "target": "xmeas_6", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_REACTOR", "target": "xmeas_7", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_REACTOR", "target": "xmeas_8", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_REACTOR", "target": "xmeas_9", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_OFFGAS_VENT", "target": "xmeas_10", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_CONDENSER", "target": "xmeas_11", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_COLUMN_SUMP", "target": "xmeas_12", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_STRIPPING_SECTION", "target": "xmeas_13", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_BOTTOMS_LINE", "target": "xmeas_14", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_REBOILER", "target": "xmeas_15", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_MANIFOLD", "target": "xmeas_16", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_FEED_MANIFOLD", "target": "xmeas_17", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_COLUMN_SUMP", "target": "xmeas_18", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_COLUMN_SUMP", "target": "xmeas_19", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_TOP_TRAY", "target": "xmeas_20", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_BOTTOMS_LINE", "target": "xmeas_21", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_OFFGAS_VENT", "target": "xmeas_22", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_CONDENSER", "target": "xmeas_23", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_CONDENSER", "target": "xmeas_24", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+
+    {"source": "EQ_TOP_TRAY", "target": "top_tray_temp", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_TOP_TRAY", "target": "top_pressure", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_REFLUX_LOOP", "target": "reflux_flow", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_DISTILLATE_LINE", "target": "distillate_flow", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_MID_TRAY_6", "target": "tray6_temp", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_COLUMN_SUMP", "target": "reboiler_bottom_temp", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_REBOILER", "target": "reboiler_steam_flow", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "EQ_BOTTOMS_LINE", "target": "butane_content", "relation": "monitored_by", "base_weight": 1.0, "dynamic_regime": false},
+
+    {"source": "xmv_1", "target": "EQ_FEED_MANIFOLD", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_2", "target": "EQ_FEED_MANIFOLD", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_3", "target": "EQ_FEED_MANIFOLD", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_4", "target": "EQ_FEED_TRAY", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_5", "target": "EQ_FEED_MANIFOLD", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_6", "target": "EQ_OFFGAS_VENT", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_7", "target": "EQ_BOTTOMS_LINE", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_8", "target": "EQ_REBOILER", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_9", "target": "EQ_BOTTOMS_LINE", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_10", "target": "EQ_REACTOR", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false},
+    {"source": "xmv_11", "target": "EQ_CONDENSER", "relation": "actuates", "base_weight": 1.0, "dynamic_regime": false}
+  ]
+}
